@@ -1,12 +1,15 @@
 const router = require('express').Router();
-const { Post } = require('../models');
+const { User, Post } = require('../models');
 
 router.get('/', async (req, res) => {
 	try {
-		const dbPostData = await Post.findAll();
+		const dbPostData = await Post.findAll({
+			include: User,
+		});
 
 		const posts = dbPostData.map((post) => post.get({ plain: true }));
 
+		console.log(posts);
 		res.render('blog', {
 			posts,
 		});

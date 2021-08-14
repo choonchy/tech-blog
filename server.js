@@ -1,7 +1,8 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
-const hbs = exphbs.create({});
+const helpers = require('./utils/helpers');
+const hbs = exphbs.create({ helpers });
 
 require('dotenv').config();
 const app = express();
