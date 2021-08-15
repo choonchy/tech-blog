@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
 		console.log(posts);
 		res.render('blog', {
 			posts,
+			logged_in: req.session.logged_in,
 		});
 	} catch (err) {
 		console.log(err);
@@ -20,7 +21,27 @@ router.get('/', async (req, res) => {
 	}
 });
 
-router.get('/dashboard', withAuth, async (req, res) => {});
+router.get('/dashboard', withAuth, async (req, res) => {
+	console.log(req.session);
+	try {
+		const dbPostData = await Post.findAll({
+			include: User,
+			where: {
+				user_id: req.session.user_id,
+			},
+		});
+
+		const posts = dbPostData.map((post) => post.get({ plain: true }));
+
+		console.log(posts);
+		res.render('dashboard', {
+			posts,
+		});
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
+	}
+});
 
 router.get('/login', (req, res) => {
 	if (req.session.logged_in) {
