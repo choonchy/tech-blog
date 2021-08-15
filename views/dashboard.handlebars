@@ -1,5 +1,9 @@
-<h2 class="text-center mb-4">Here's a list of all your posts!</h2>
+<div class="d-flex flex-column align-items-center">
+    <h2 class="text-center mb-4">Hi, {{user.username}}!</h2>
+    <h3 class="text-center mb-4">Here's a list of all your posts 😊</h3>
+    <a href="/new-post"><button type="button" class="btn btn-info mb-4">+ New Post</button></a>
 
-{{#each posts as |post|}}
-{{> post-details}}
-{{/each}}
+    {{#each posts as |post|}}
+        {{> post-details}}
+    {{/each}}
+</div>

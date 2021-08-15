@@ -21,9 +21,9 @@
                         <a class="nav-link" href="/">Home</a>
                         <a class="nav-link" href="/dashboard">Dashboard</a>
                         {{#if logged_in}}
-                        <button class="nav-link px-1" id="logout">Log Out</button>
+                        <button class="btn btn-info" id="logout">Log Out</button>
                         {{else}}
-                        <a href="/login"><button class="nav-link px-1" id="login">Log In</button></a>
+                        <a href="/login"><button class="btn btn-info ml-2" id="login">Log In</button></a>
                         {{/if}}
                     </li>
                 </ul>
