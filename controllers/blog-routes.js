@@ -53,6 +53,31 @@ router.get('/dashboard', withAuth, async (req, res) => {
 	}
 });
 
+router.get('/post/:id', async (req, res) => {
+	try {
+		const postData = await Post.findOne({
+			include: User,
+			where: {
+				id: req.params.id,
+			},
+		});
+
+		if (!postData) {
+			res.redirect('/');
+		}
+
+		const post = postData.get({ plain: true });
+
+		console.log(post);
+
+		res.render('post', {
+			post,
+		});
+	} catch (err) {
+		res.status(500).json(err);
+	}
+});
+
 router.get('/new-post', withAuth, async (req, res) => {
 	res.render('newpost', {
 		logged_in: req.session.logged_in,
