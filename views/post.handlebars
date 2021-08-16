@@ -1,0 +1,8 @@
+{{#if post}}
+<div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center bg-info text-white">
+            <h3 class="card-title p-2">{{post.title}}</h3>
+            <div class="p-2">Posted by <a class="text-white" href="/users/{{post.user.username}}">{{post.user.username}}</a> at {{format_time post.createdAt}}</div>
+        </div>
+    <div class="card-body">{{post.content}}</div>
+</div>
