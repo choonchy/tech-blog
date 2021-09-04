@@ -59,7 +59,7 @@ router.get('/users/:user', async (req, res) => {
 			include: User,
 			order: [['createdAt', 'DESC']],
 			where: {
-				username: req.params.user,
+				user_id: req.params.user,
 			},
 		});
 
