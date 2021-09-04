@@ -53,6 +53,29 @@ router.get('/dashboard', withAuth, async (req, res) => {
 	}
 });
 
+router.get('/users/:user', async (req, res) => {
+	try {
+		const dbPostData = await Post.findAll({
+			include: User,
+			order: [['createdAt', 'DESC']],
+			where: {
+				username: req.params.user,
+			},
+		});
+
+		const posts = dbPostData.map((post) => post.get({ plain: true }));
+
+		console.log(posts);
+		res.render('blog', {
+			posts,
+			logged_in: req.session.logged_in,
+		});
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
+	}
+});
+
 router.get('/post/:id', async (req, res) => {
 	try {
 		const postData = await Post.findOne({
